@@ -13,7 +13,7 @@ function MinimizeMobile.Create(props)
 	Instance.new("UICorner", sq).CornerRadius = UDim.new(0, 10)
 
 	local dragging, dragStart, startPos, moved = false, nil, nil, false
-	local threshold = props.Threshold or 6
+	local threshold = props.Threshold or 12
 
 	sq.InputBegan:Connect(function(i)
 		if i.UserInputType.Name == "MouseButton1" or i.UserInputType.Name == "Touch" then
