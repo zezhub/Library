@@ -5,15 +5,6 @@
   Used across all <b>Z&Z Hub</b> projects.
 </p>
 
-<p align="center">
-  <a href="https://github.com/skyzzkl/library-zez">
-    <img src="https://img.shields.io/badge/GitHub-Repo-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Repo" />
-  </a>
-  <a href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="MIT License" />
-  </a>
-</p>
-
 <hr/>
 
 <h2 align="center">📦 About</h2>
@@ -29,23 +20,6 @@
   <li>Clean, script-friendly API</li>
   <li>Fully open-source and editable</li>
 </ul>
-
-<hr/>
-
-<h2 align="center">🚀 Getting Started</h2>
-
-```lua
--- Load the library directly
-local ZEZ = loadstring(game:HttpGet("https://raw.githubusercontent.com/skyzzkl/library-zez/main/source.lua"))()
-
--- Create your UI
-local Window = ZEZ:CreateWindow({
-    title = "My Script",
-    theme = "dark"
-})
-```
-
-> Full API documentation coming soon.
 
 <hr/>
 
