@@ -1,6 +1,6 @@
 local zez = loadstring(game:HttpGet("https://raw.githubusercontent.com/zezhub/Library/refs/heads/main/lib/dev/main.lua"))()
-local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/zez/master/Addons/SaveManager.lua"))()
-local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/zez/master/Addons/InterfaceManager.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/zezhub/Library/refs/heads/main/lib/latest/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/zezhub/Library/refs/heads/main/lib/latest/InterfaceManager.lua"))()
 
 local Window = zez:CreateWindow({
     Title = "zez " .. zez.Version,
