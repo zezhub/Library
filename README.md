@@ -2,7 +2,7 @@
 
 <p align="center">
   Minimal and reusable UI library for <b>Roblox scripts</b>.<br/>
-  Used across all <b>Z&Z Hub</b> projects.
+  Used across all <b>ZEZ Hub</b> projects.
 </p>
 
 <hr/>
@@ -33,6 +33,6 @@
 <hr/>
 
 <p align="center">
-  Made with care by <b>Z&Z Hub</b>
+  Made with care by <b>ZEZ Z</b>
   <br><sub><span style="color: gray;">based on Fluent</span></sub>
 </p>
