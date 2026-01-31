@@ -2,7 +2,7 @@
 
 <p align="center">
   Minimal and reusable UI library for <b>Roblox scripts</b>.<br/>
-  Used across all <b>ZEZ Hub</b> projects.
+  Used across all <b>ZEN Scripts</b> projects.
 </p>
 
 <hr/>
