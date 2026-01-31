@@ -33,6 +33,6 @@
 <hr/>
 
 <p align="center">
-  Made with care by <b>ZEZ Z</b>
+  Made with care by <b>Skyzzk</b>
   <br><sub><span style="color: gray;">based on Fluent</span></sub>
 </p>
