@@ -7,41 +7,39 @@ local Window = zez:CreateWindow({
     SubTitle = "by skyzzkl",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
-    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Acrylic = true, -- Enables background blur (can be detectable; disable if needed)
     Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.LeftControl, -- Used when there's no MinimizeKeybind
+    MinimizeKey = Enum.KeyCode.LeftControl, -- Fallback key to minimize the UI
     FloatBtn = {
-        Enable = true,         -- Enable or disable the floating minimize button
-        DecalId = 12345678,    -- Optional image asset ID
-        Size = 60,             -- Button size in pixels
-        Sensitivity = 12       -- Drag threshold in pixels
+        Enable = true,      -- Toggles the floating minimize button
+        DecalId = 12345678, -- Optional image asset ID for the button
+        Size = 60,          -- Button size (pixels)
+        Sensitivity = 12    -- Drag sensitivity threshold (pixels)
     }
 })
 
---zez provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+-- zez supports Lucide icons for tabs (https://lucide.dev/icons)
+-- Icons are optional and purely visual
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
+-- Shortcut reference for all registered options
 local Options = zez.Options
 
 do
     zez:Notify({
         Title = "Notification",
         Content = "This is a notification",
-        SubContent = "SubContent", -- Optional
-        Duration = 5 -- Set to nil to make the notification not disappear
+        SubContent = "SubContent", -- Optional secondary text
+        Duration = 5 -- Set to nil to make it persistent
     })
-
-
 
     Tabs.Main:AddParagraph({
         Title = "Paragraph",
         Content = "This is a paragraph.\nSecond line!"
     })
-
-
 
     Tabs.Main:AddButton({
         Title = "Button",
@@ -68,9 +66,8 @@ do
         end
     })
 
-
-
-    local Toggle = Tabs.Main:AddToggle("MyToggle", {Title = "Toggle", Default = false })
+    -- Toggle element example
+    local Toggle = Tabs.Main:AddToggle("MyToggle", { Title = "Toggle", Default = false })
 
     Toggle:OnChanged(function()
         print("Toggle changed:", Options.MyToggle.Value)
@@ -78,8 +75,7 @@ do
 
     Options.MyToggle:SetValue(false)
 
-
-    
+    -- Slider element example
     local Slider = Tabs.Main:AddSlider("Slider", {
         Title = "Slider",
         Description = "This is a slider",
@@ -98,13 +94,15 @@ do
 
     Slider:SetValue(3)
 
-
-
+    -- Single-choice dropdown example
     local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
         Title = "Dropdown",
-        Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+        Values = {
+            "one", "two", "three", "four", "five", "six", "seven",
+            "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"
+        },
         Multi = false,
-        Default = 1,
+        Default = 1
     })
 
     Dropdown:SetValue("four")
@@ -113,14 +111,16 @@ do
         print("Dropdown changed:", Value)
     end)
 
-
-    
+    -- Multi-select dropdown example
     local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdown", {
         Title = "Dropdown",
-        Description = "You can select multiple values.",
-        Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+        Description = "Allows multiple selections.",
+        Values = {
+            "one", "two", "three", "four", "five", "six", "seven",
+            "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"
+        },
         Multi = true,
-        Default = {"seven", "twelve"},
+        Default = { "seven", "twelve" }
     })
 
     MultiDropdown:SetValue({
@@ -131,14 +131,13 @@ do
 
     MultiDropdown:OnChanged(function(Value)
         local Values = {}
-        for Value, State in next, Value do
-            table.insert(Values, Value)
+        for ValueName, _ in next, Value do
+            table.insert(Values, ValueName)
         end
-        print("Mutlidropdown changed:", table.concat(Values, ", "))
+        print("Multidropdown changed:", table.concat(Values, ", "))
     end)
 
-
-
+    -- Basic color picker example
     local Colorpicker = Tabs.Main:AddColorpicker("Colorpicker", {
         Title = "Colorpicker",
         Default = Color3.fromRGB(96, 205, 255)
@@ -147,14 +146,13 @@ do
     Colorpicker:OnChanged(function()
         print("Colorpicker changed:", Colorpicker.Value)
     end)
-    
+
     Colorpicker:SetValueRGB(Color3.fromRGB(0, 255, 140))
 
-
-
+    -- Color picker with transparency support
     local TColorpicker = Tabs.Main:AddColorpicker("TransparencyColorpicker", {
         Title = "Colorpicker",
-        Description = "but you can change the transparency.",
+        Description = "Supports transparency control.",
         Transparency = 0,
         Default = Color3.fromRGB(96, 205, 255)
     })
@@ -166,26 +164,24 @@ do
         )
     end)
 
-
-
+    -- Keybind example
     local Keybind = Tabs.Main:AddKeybind("Keybind", {
         Title = "KeyBind",
-        Mode = "Toggle", -- Always, Toggle, Hold
-        Default = "LeftControl", -- String as the name of the keybind (MB1, MB2 for mouse buttons)
+        Mode = "Toggle", -- Modes: Always, Toggle, Hold
+        Default = "LeftControl", -- Key name (MB1 / MB2 for mouse buttons)
 
-        -- Occurs when the keybind is clicked, Value is `true`/`false`
+        -- Fired when the keybind is activated
         Callback = function(Value)
             print("Keybind clicked!", Value)
         end,
 
-        -- Occurs when the keybind itself is changed, `New` is a KeyCode Enum OR a UserInputType Enum
+        -- Fired when the keybind itself is re-bound
         ChangedCallback = function(New)
             print("Keybind changed!", New)
         end
     })
 
-    -- OnClick is only fired when you press the keybind and the mode is Toggle
-    -- Otherwise, you will have to use Keybind:GetState()
+    -- OnClick only fires in Toggle mode
     Keybind:OnClick(function()
         print("Keybind clicked:", Keybind:GetState())
     end)
@@ -194,11 +190,11 @@ do
         print("Keybind changed:", Keybind.Value)
     end)
 
+    -- Continuous keybind state checker example
     task.spawn(function()
         while true do
             wait(1)
 
-            -- example for checking if a keybind is being pressed
             local state = Keybind:GetState()
             if state then
                 print("Keybind is being held down")
@@ -208,15 +204,16 @@ do
         end
     end)
 
-    Keybind:SetValue("MB2", "Toggle") -- Sets keybind to MB2, mode to Hold
+    -- Changes keybind to MB2 and mode to Toggle
+    Keybind:SetValue("MB2", "Toggle")
 
-
+    -- Text input example
     local Input = Tabs.Main:AddInput("Input", {
         Title = "Input",
         Default = "Default",
         Placeholder = "Placeholder",
-        Numeric = false, -- Only allows numbers
-        Finished = false, -- Only calls callback when you press enter
+        Numeric = false,  -- Restricts input to numbers only
+        Finished = false, -- Fires callback only on Enter
         Callback = function(Value)
             print("Input changed:", Value)
         end
@@ -227,32 +224,30 @@ do
     end)
 end
 
+-- Addons overview:
+-- SaveManager: Handles config saving/loading
+-- InterfaceManager: Handles UI-related persistence
 
--- Addons:
--- SaveManager (Allows you to have a configuration system)
--- InterfaceManager (Allows you to have a interface managment system)
-
--- Hand the library over to our managers
+-- Bind the UI library to both managers
 SaveManager:SetLibrary(zez)
 InterfaceManager:SetLibrary(zez)
 
--- Ignore keys that are used by ThemeManager.
--- (we dont want configs to save themes, do we?)
+-- Prevent theme-related settings from being saved
 SaveManager:IgnoreThemeSettings()
 
--- You can add indexes of elements the save manager should ignore
+-- Define specific option indexes to ignore (if needed)
 SaveManager:SetIgnoreIndexes({})
 
--- use case for doing it this way:
--- a script hub could have themes in a global folder
--- and game configs in a separate folder per game
+-- Folder structure example:
+-- Global themes in one folder, per-game configs in another
 InterfaceManager:SetFolder("zezScriptHub")
 SaveManager:SetFolder("zezScriptHub/specific-game")
 
+-- Build settings UI sections
 InterfaceManager:BuildInterfaceSection(Tabs.Settings)
 SaveManager:BuildConfigSection(Tabs.Settings)
 
-
+-- Select the first tab on load
 Window:SelectTab(1)
 
 zez:Notify({
@@ -261,6 +256,5 @@ zez:Notify({
     Duration = 8
 })
 
--- You can use the SaveManager:LoadAutoloadConfig() to load a config
--- which has been marked to be one that auto loads!
+-- Loads the config marked as auto-load (if any)
 SaveManager:LoadAutoloadConfig()
