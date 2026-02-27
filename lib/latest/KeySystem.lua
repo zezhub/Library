@@ -52,7 +52,7 @@ function lib:CreatePanel(config)
 	local discordLink = config.Discord or DEFAULT_DISCORD
 	local endpoint = config.Endpoint or DEFAULT_ENDPOINT
 	local callback = config.Callback
-	local verifyEndpoint = endpoint .. "/verify"
+	local verifyEndpoint = endpoint .. "/api/verify"
 
 	local gui = Instance.new("ScreenGui")
 	gui.Name = "KeySystemUI"
